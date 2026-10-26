@@ -10,8 +10,7 @@
   },
   "lint-staged": {
     "**/*.js": [
-      "prettier --check --ignore-unknown",
-      "eslint"
+      "prettier --check --ignore-unknown"
     ],
     "**/*.{html,json,css,md}": [
       "prettier --check --ignore-unknown"

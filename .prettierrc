@@ -10,12 +10,11 @@
   "arrowParens": "always",
   "experimentalTernaries": true,
   "overrides": [
-      {
-        "files": "*.css",
-        "options": {
-          "singleQuote": false
-        }
+    {
+      "files": "*.css",
+      "options": {
+        "singleQuote": false
       }
-    ]
-
+    }
+  ]
 }
