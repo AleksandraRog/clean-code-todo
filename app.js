@@ -74,11 +74,10 @@ const editTask = (event) => {
     //switch to .editmode
     //label becomes the inputs value.
     label.innerText = editInput.value;
-    editBtn.innerText = 'Edit';
   } else {
-    editInput.value = label.innerText;
-    editBtn.innerText = 'Save';
+    editInput.value = label.textContent;
   }
+  editBtn.textContent = containsClass ? 'Edit' : 'Save';
   taskItem.classList.toggle('edit-mode');
 };
 
