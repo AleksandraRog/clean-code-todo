@@ -44,7 +44,6 @@ const bindTaskEvents = (taskItem, checkBoxEventHandler) => {
 
   editButton.onclick = editTask;
   deleteButton.onclick = deleteTask;
-  //Bind taskCompleted to checkBoxEventHandler.
   checkBox.onchange = checkBoxEventHandler;
 };
 
@@ -54,7 +53,7 @@ const addTask = () => {
   if (!taskInput.value) return;
   const taskItem = createNewTask(taskInput.value);
   incompleteTasksList.appendChild(taskItem);
-  bindTaskEvents(taskItem, taskCompleted);
+  bindTaskEvents(taskItem, taskToggleComplete);
 
   taskInput.value = '';
 };
@@ -89,34 +88,22 @@ const deleteTask = (event) => {
   tasksList.removeChild(taskItem);
 };
 
-const taskIncomplete = (event) => {
-  console.log('Incomplete Task...');
-  //Mark task as incomplete.
-  //When the checkbox is unchecked
-  //Append the task list item to the #incompleteTasks.
+const taskToggleComplete = (event) => {
   const taskItem = event.target.parentNode;
-  incompleteTasksList.appendChild(taskItem);
-  bindTaskEvents(taskItem, taskCompleted);
+  const completeNextState = taskItem.parentNode.id === 'completed-tasks' ? 'Incomplete' : 'Completed';
+  console.log(`${completeNextState} Task...`);
+  const nextTasksList = completeNextState === 'Completed' ? completedTasksList : incompleteTasksList;
+  nextTasksList.appendChild(taskItem);
 };
-
-//Mark task completed
-function taskCompleted() {
-  console.log('Complete Task...');
-
-  //Append the task list item to the #completed-tasks
-  const taskItem = this.parentNode;
-  completedTasksList.appendChild(taskItem);
-  bindTaskEvents(taskItem, taskIncomplete);
-}
 
 //The glue to hold it all together.
 
 addTaskButton.addEventListener('click', addTask);
 
 for (let i = 0; i < incompleteTasksList.children.length; i++) {
-  bindTaskEvents(incompleteTasksList.children[i], taskCompleted);
+  bindTaskEvents(incompleteTasksList.children[i], taskToggleComplete);
 }
 
 for (let i = 0; i < completedTasksList.children.length; i++) {
-  bindTaskEvents(completedTasksList.children[i], taskIncomplete);
+  bindTaskEvents(completedTasksList.children[i], taskToggleComplete);
 }
