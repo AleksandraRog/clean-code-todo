@@ -1,16 +1,16 @@
 const taskInput = document.getElementById('new-task');
-const addButton = document.getElementsByTagName('button')[0];
-const incompleteTaskHolder = document.getElementById('incompleteTasks');
-const completedTasksHolder = document.getElementById('completed-tasks');
+const addTaskButton = document.getElementsByTagName('button')[0];
+const incompleteTasksList = document.getElementById('incomplete-tasks');
+const completedTasksList = document.getElementById('completed-tasks');
 
-const createNewTaskElement = function (taskString) {
+const createNewTask = function (taskString) {
   const listItem = document.createElement('li');
   const checkBox = document.createElement('input');
   const label = document.createElement('label');
   const editInput = document.createElement('input');
   const editButton = document.createElement('button');
   const deleteButton = document.createElement('button');
-  const deleteButtonImg = document.createElement('img');
+  const deleteIcon = document.createElement('img');
 
   label.innerText = taskString;
   label.className = 'task';
@@ -24,8 +24,8 @@ const createNewTaskElement = function (taskString) {
   editButton.className = 'edit';
 
   deleteButton.className = 'delete';
-  deleteButtonImg.src = './remove.svg';
-  deleteButton.appendChild(deleteButtonImg);
+  deleteIcon.src = './remove.svg';
+  deleteButton.appendChild(deleteIcon);
 
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
@@ -52,8 +52,8 @@ const addTask = function () {
   console.log('Add Task...');
   //Create a new list item with the text from the #new-task:
   if (!taskInput.value) return;
-  const listItem = createNewTaskElement(taskInput.value);
-  incompleteTaskHolder.appendChild(listItem);
+  const listItem = createNewTask(taskInput.value);
+  incompleteTasksList.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 
   taskInput.value = '';
@@ -96,7 +96,7 @@ const taskIncomplete = function () {
   //When the checkbox is unchecked
   //Append the task list item to the #incompleteTasks.
   const listItem = this.parentNode;
-  incompleteTaskHolder.appendChild(listItem);
+  incompleteTasksList.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 };
 
@@ -106,18 +106,18 @@ function taskCompleted() {
 
   //Append the task list item to the #completed-tasks
   const listItem = this.parentNode;
-  completedTasksHolder.appendChild(listItem);
+  completedTasksList.appendChild(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 }
 
 //The glue to hold it all together.
 
-addButton.addEventListener('click', addTask);
+addTaskButton.addEventListener('click', addTask);
 
-for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
-  bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
+for (let i = 0; i < incompleteTasksList.children.length; i++) {
+  bindTaskEvents(incompleteTasksList.children[i], taskCompleted);
 }
 
-for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
+for (let i = 0; i < completedTasksList.children.length; i++) {
+  bindTaskEvents(completedTasksList.children[i], taskIncomplete);
 }
