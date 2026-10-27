@@ -26,12 +26,7 @@ const createNewTask = function (taskString) {
   deleteButton.className = 'delete';
   deleteIcon.src = './remove.svg';
   deleteButton.appendChild(deleteIcon);
-
-  taskItem.appendChild(checkBox);
-  taskItem.appendChild(label);
-  taskItem.appendChild(editInput);
-  taskItem.appendChild(editButton);
-  taskItem.appendChild(deleteButton);
+  taskItem.append(checkBox, label, editInput, editButton, deleteButton);
   return taskItem;
 };
 
