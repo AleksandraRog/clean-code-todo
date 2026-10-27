@@ -116,7 +116,6 @@ const ajaxRequest = function () {
 
 //The glue to hold it all together.
 
-addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
 addButton.addEventListener('click', ajaxRequest);
 
