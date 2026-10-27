@@ -100,10 +100,8 @@ const taskToggleComplete = (event) => {
 
 addTaskButton.addEventListener('click', addTask);
 
-for (let i = 0; i < incompleteTasksList.children.length; i++) {
-  bindTaskEvents(incompleteTasksList.children[i], taskToggleComplete);
-}
+const allTaskItems = [...incompleteTasksList.children, ...completedTasksList.children];
 
-for (let i = 0; i < completedTasksList.children.length; i++) {
-  bindTaskEvents(completedTasksList.children[i], taskToggleComplete);
-}
+allTaskItems.forEach((task) => {
+  bindTaskEvents(task, taskToggleComplete);
+});
