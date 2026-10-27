@@ -1,4 +1,4 @@
-const taskInput = document.getElementById('new-task');
+const newTaskInput = document.getElementById('new-task');
 const addTaskButton = document.getElementsByTagName('button')[0];
 const incompleteTasksList = document.getElementById('incomplete-tasks');
 const completedTasksList = document.getElementById('completed-tasks');
@@ -49,13 +49,13 @@ const bindTaskEvents = (taskItem, checkBoxEventHandler) => {
 
 const addTask = () => {
   console.log('Add Task...');
-  //Create a new list item with the text from the #new-task:
-  if (!taskInput.value) return;
-  const taskItem = createNewTask(taskInput.value);
+
+  if (!newTaskInput.value) return;
+  const taskItem = createNewTask(newTaskInput.value);
   incompleteTasksList.appendChild(taskItem);
   bindTaskEvents(taskItem, taskToggleComplete);
 
-  taskInput.value = '';
+  newTaskInput.value = '';
 };
 
 const editTask = (event) => {
@@ -67,7 +67,8 @@ const editTask = (event) => {
   const editInput = taskItem.querySelector('input[type=text]');
   const label = taskItem.querySelector('label');
   const editBtn = taskItem.querySelector('.edit');
-  const containsClass = taskItem.classList.contains('editMode');
+
+  const containsClass = taskItem.classList.contains('edit-mode');
   //If class of the parent is .editmode
   if (containsClass) {
     //switch to .editmode
@@ -78,7 +79,7 @@ const editTask = (event) => {
     editInput.value = label.innerText;
     editBtn.innerText = 'Save';
   }
-  taskItem.classList.toggle('editMode');
+  taskItem.classList.toggle('edit-mode');
 };
 
 const deleteTask = (event) => {
