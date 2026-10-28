@@ -31,7 +31,6 @@ const createNewTask = function (taskString) {
 };
 
 const bindTaskEvents = (taskItem, checkBoxEventHandler) => {
-  console.log('bind list item events');
   //select ListItems children
   const checkBox = taskItem.querySelector('input[type=checkbox]');
   const editButton = taskItem.querySelector('button.edit');
@@ -43,8 +42,6 @@ const bindTaskEvents = (taskItem, checkBoxEventHandler) => {
 };
 
 const addTask = () => {
-  console.log('Add Task...');
-
   if (!newTaskInput.value) return;
   const taskItem = createNewTask(newTaskInput.value);
   incompleteTasksList.appendChild(taskItem);
@@ -54,10 +51,7 @@ const addTask = () => {
 };
 
 const editTask = (event) => {
-  console.log('Edit Task...');
-  console.log("Change 'edit' to 'save'");
-
-  const taskItem = event.target.parentNode;
+  const taskItem = event.currentTarget.parentNode;
 
   const editInput = taskItem.querySelector('input[type=text]');
   const label = taskItem.querySelector('label');
@@ -77,16 +71,14 @@ const editTask = (event) => {
 };
 
 const deleteTask = (event) => {
-  console.log('Delete Task...');
-  const taskItem = event.target.parentNode;
+  const taskItem = event.currentTarget.parentNode;
   const tasksList = taskItem.parentNode;
   tasksList.removeChild(taskItem);
 };
 
 const taskToggleComplete = (event) => {
-  const taskItem = event.target.parentNode;
+  const taskItem = event.currentTarget.parentNode;
   const completeNextState = taskItem.parentNode.id === 'completed-tasks' ? 'Incomplete' : 'Completed';
-  console.log(`${completeNextState} Task...`);
   const nextTasksList = completeNextState === 'Completed' ? completedTasksList : incompleteTasksList;
   nextTasksList.appendChild(taskItem);
 };
